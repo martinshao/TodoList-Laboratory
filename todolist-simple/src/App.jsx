@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import "./todolist.css";
-import TodoItem from "./TodoItem.js";
+import "./App.css";
+import TodoList from "./components/TodoList";
 
-class TodoList extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -14,6 +14,7 @@ class TodoList extends Component {
     this.handleBtnClick = this.handleBtnClick.bind(this);
     this.handleItemDel = this.handleItemDel.bind(this);
   }
+
   render() {
     return (
       <Fragment>
@@ -26,24 +27,9 @@ class TodoList extends Component {
           onChange={this.handleInputChange}
         />
         <button onClick={this.handleBtnClick}>提交</button>
-        <ul>
-          { this.getTodoItem() }
-        </ul>
+        <TodoList list={this.state.list} handleItemDel={this.handleItemDel} />
       </Fragment>
     )
-  }
-
-  getTodoItem() {
-    return this.state.list.map((item, index) => {
-      return (
-        <TodoItem
-          key={index}
-          content={item}
-          index={index}
-          deleteItem={this.handleItemDel}
-        />
-      )
-    })
   }
 
   handleInputChange(e) {
@@ -51,14 +37,15 @@ class TodoList extends Component {
     // this.setState({
     //   inputValue: e.target.value
     // })
-    // 这种是react-v16推荐的写法
+    // 这种是react-v6推荐的写法
     const value = e.target.value;
     this.setState(
-      ()=> ({
+      () => ({
         inputValue: value
       })
     )
   }
+
   handleBtnClick() {
     // react 不允许我们对 state 做任何改变
     // react 改变数据必须调用setState(function)
@@ -79,4 +66,4 @@ class TodoList extends Component {
   }
 }
 
-export default TodoList;
+export default App;

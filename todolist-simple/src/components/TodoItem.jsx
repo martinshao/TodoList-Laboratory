@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class TodoItem extends Component {
+
+  static propTypes = {
+    content: PropTypes.string.isRequired,
+    deleteItem: PropTypes.func.isRequired,
+  }
 
   constructor(props) {
     super(props);
@@ -21,7 +27,6 @@ class TodoItem extends Component {
     const { deleteItem, index } = this.props;
     deleteItem(index);
   }
-
 }
 
 export default TodoItem;
