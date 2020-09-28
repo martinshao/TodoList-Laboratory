@@ -1,6 +1,6 @@
 # TODOLIST 实验厂
 
-![todolist](./images/todolist-vert.png)
+![todolist](./images/todoist_land.png)
 
 最简单的业务尝试各种新奇技术。
 
