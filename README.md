@@ -36,8 +36,8 @@
 
 `redux` 虽然很优秀，但是可能缺乏一点灵活度，尤其是单一组件存在复杂的数据类型需要管理，创建大量的 `action` 和频繁调用大量的 `dispatch` 函数让人疲于奔命。这时候灵活的 `mobx` 可能用起来更得心应手。
 
-![](./iamges/../images/mobx-flow.png)
-![](./images/react-mobx.png)
+![](./images/mobx-flow.png)
+![](./images/react-inject-mobx.png)
 
 另外使用 `TypeScript` 也是这个todolist系列新增的。客观上讲， `TS` 的运用确实增加了部分代码量，主要在于各种 interface 类型的声明，但是考虑大型项目的迭代，以及 `JavaScript` 动态类型带来的隐患， `TS` 是提升项目可迭代性的最有利武器。
 
