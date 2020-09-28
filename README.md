@@ -1,5 +1,7 @@
 # TODOLIST 实验厂
 
+![todolist](./images/todolist-vert.png)
+
 最简单的业务尝试各种新奇技术。
 
 ## todolist-simple
