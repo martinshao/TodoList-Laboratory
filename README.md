@@ -42,3 +42,10 @@
 另外使用 `TypeScript` 也是这个todolist系列新增的。客观上讲， `TS` 的运用确实增加了部分代码量，主要在于各种 interface 类型的声明，但是考虑大型项目的迭代，以及 `JavaScript` 动态类型带来的隐患， `TS` 是提升项目可迭代性的最有利武器。
 
 一个很深的感触是，纯 `JavaScript` 的 `react` 项目开发完后，跑起来总是避免不了一些小问题，但是基于 `TypeScript` 的 `react` 项目大部分时候都能让我无错启动项目。
+
+
+## 参考案例
+
+* [black7375/React-RxJS-Todo](https://github.com/black7375/React-RxJS-Todo)
+* [josepot/react-rxjs-todos](https://github.com/josepot/react-rxjs-todos)
+* [jellive/react-rxjs-todo](https://github.com/jellive/react-rxjs-todo)
