@@ -56,7 +56,7 @@ function Todos(props) {
 
   let todoList, todoFooter;
 
-  if (todos.length) {
+  if (todos?.length) {
     const remainingCount = todos.filter(todo => !todo.completed).length;
     const hasCompleted = todos.length > remainingCount;
 

@@ -31,13 +31,21 @@ class TodoService {
     this.toggleAllTodos$ = new Subject();
     this.removeCompletedTodos$ = new Subject();
 
+    console.info('this.update$', this.update$)
+
     this.todos$ = this.update$.pipe(
       scan((todos, operation) => operation(todos), initialTodos),
       publishReplay(1),
       refCount()
     )
 
-    this.todos$.forEach(todos => localStorage.setItem('react-rxjs-todos', JSON.stringify(todos)));
+    console.info('this.todos$', this.todos$)
+
+    this.todos$.observers.forEach(todos => localStorage.setItem('react-rxjs-todos', JSON.stringify(todos)));
+
+    console.info('this.create$', this.create$)
+
+    console.info('this.update$', this.update$)
 
     this.create$.pipe(
         map(todo => todos => todos.concat(todo))
