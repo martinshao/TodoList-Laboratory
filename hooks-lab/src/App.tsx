@@ -8,13 +8,14 @@ import './App.css';
 // import UseUpdateDemo from './components/UseUpdateDemo'
 // import UseStateDemo from './components/UseStateDemo'
 // import SyntheticEventDemo from './components/SyntheticEventDemo'
-import ClassComponent from './components/ClassComponent'
+// import ClassComponent from './components/ClassComponent'
+import UseIntervalDemo from './components/UseIntervalDemo'
 
 function App() {
   // console.info('App rendering...')
   return (
     <div className="App">
-      <ClassComponent message='count' />
+      <UseIntervalDemo />
     </div>
   );
 }
