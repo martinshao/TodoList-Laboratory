@@ -9,6 +9,8 @@ interface TodoProps {
 const Todo: React.FC<TodoProps> = ({ todo, updateTodo }) => {
   const checkTodo: string = todo.status ? 'line-through' : '';
 
+  console.info(todo.title)
+
   return (
     <div className="Card">
       <div className="Card--text">
