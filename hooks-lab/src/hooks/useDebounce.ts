@@ -1,6 +1,6 @@
 import { useState, useEffect, DependencyList, useCallback } from 'react'
 
-export type UseDebounceReturn = [() => boolean | null, () => void];
+export type UseDebounceReturn = [boolean, () => void];
 
 /**
  * 

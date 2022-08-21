@@ -7,6 +7,10 @@ const style = {
   border: '1px solid blue',
 }
 
+function Cell() {
+  return <div>Cell</div>
+}
+
 const eventLog = (useCapture: boolean, elementName: string) => {
   const phaseType = useCapture ? 'Capturing' : 'Bubbling'
   console.info(`${phaseType} ${elementName}`)
@@ -23,15 +27,18 @@ const SyntheticEventDemo: React.FC<any> = (props) => {
   //   console.info(`${phaseType} ${elementName}`)
   // }
 
-  const handleFormClick = (event: React.MouseEvent<HTMLFormElement>): void => {
+  const handleFormClick = (event: React.MouseEvent): void => {
+    console.info('form', (event.target as HTMLParagraphElement).getAttribute('data-test-id'))
     eventLog(false, 'form')
   }
 
   const handleDivClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    console.info('div', event)
     eventLog(false, 'div')
   }
 
   const handlePClick = (event: React.MouseEvent<HTMLParagraphElement>) => {
+    console.info('paragraph', event)
     eventLog(false, 'paragraph')
   }
 
@@ -56,7 +63,8 @@ const SyntheticEventDemo: React.FC<any> = (props) => {
       </form> */}
       <form style={style} onClick={handleFormClick}>FORM
         <div style={style} onClick={handleDivClick}>DIV
-          <p style={style} onClick={handlePClick}>P</p>
+          <p style={style} onClick={handlePClick} data-test-id="paragraph 1 2">P</p>
+          <Cell />
         </div>
       </form>
     </div >

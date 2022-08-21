@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useReducer, Reducer } from 'react'
+import UseMemoDemo from '../../containers/UseMemoDemo'
 
 interface CounterProps {
   name: string;
@@ -68,6 +69,7 @@ const Counter: React.FC<CounterProps> = ({ name }) => {
 
   return (
     <div>
+      <UseMemoDemo person={{}} />
       <p>{name}</p>
       <p> you clicked {count} times</p>
       <input type="number" value={step} onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch({ type: 'step', step: Number(e.currentTarget.value) })} />

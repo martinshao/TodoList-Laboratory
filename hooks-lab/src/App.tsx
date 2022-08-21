@@ -7,15 +7,19 @@ import './App.css';
 // import UseMountDemo from './components/UseMountDemo'
 // import UseUpdateDemo from './components/UseUpdateDemo'
 // import UseStateDemo from './components/UseStateDemo'
-// import SyntheticEventDemo from './components/SyntheticEventDemo'
+import SyntheticEventDemo from './components/SyntheticEventDemo'
 // import ClassComponent from './components/ClassComponent'
-import UseIntervalDemo from './components/UseIntervalDemo'
+// import UseIntervalDemo from './components/UseIntervalDemo'
+// import UseImhDemo from './containers/UseImhDemo'
+// import UseLeDemo from './containers/UseLeDemo'
+// import UseMemoDemo from './containers/UseMemoDemo'
+// import EffectOrderDemo from './containers/EffectOrderDemo'
 
 function App() {
   // console.info('App rendering...')
   return (
     <div className="App">
-      <UseIntervalDemo />
+      <SyntheticEventDemo />
     </div>
   );
 }
