@@ -1,8 +1,7 @@
 import { Fiber } from "../../../source/ReactFiberHooks";
-import { NoLanes } from "./ReactFiberLane";
+import { Lane, NoLanes } from "./ReactFiberLane";
+import { Dispatch, BasicStateAction } from './ReactInternalTypes'
 
-export type Lanes = number;
-export type Lane = number;
 export type LaneMap<T> = Array<T>;
 export type RefObject = {
   current: any,
@@ -32,21 +31,6 @@ export type ReactContext<T> = {
   _globalName: string,
 };
 
-export type ContextDependency<T> = {
-  context: ReactContext<T>,
-  next: ContextDependency<unknown> | null,
-  memoizedValue: T,
-};
-
-export type Dependencies = {
-  lanes: Lanes,
-  firstContext: ContextDependency<unknown> | null,
-};
-
-type BasicStateAction<S> = ((action: S) => S) | S;
-
-type Dispatch<A> = (action: A) => void;
-
 let currentlyRenderingFiber: Fiber = null as any;
 
 export type Update<S, A> = {
@@ -57,11 +41,30 @@ export type Update<S, A> = {
   next: Update<S, A>,
 };
 
+/**
+ * Hook 单元的基本结构
+ */
 export type Hook = {
+  /**
+   * 对于不同hook，有不同的值
+   */
   memoizedState: any,
+  /**
+   * 初始state
+   */
   baseState: any,
+  /**
+   * 初始queue队列
+   */
   baseQueue: Update<any, any> | null,
+  /**
+   * 需要更新的update
+   * 可能类型 UpdateQueue
+   */
   queue: any,
+  /**
+   * 下一个hook
+   */
   next: Hook | null,
 };
 
@@ -94,12 +97,19 @@ function mountWorkInProgressHook(): Hook {
   return workInProgressHook;
 }
 
-function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
+export function basicStateReducer<S>(state: S, action: BasicStateAction<S>): S {
   // $FlowFixMe: Flow doesn't like mixed types
   return typeof action === 'function' ? (action as (action: S) => S)(state) : action;
 }
 
-function mountState<S>(
+/**
+ * 
+ * @param initialState 
+ * @returns 
+ * 
+ * dipatch: React.Dispatch<React.SetStateAction<number>>
+ */
+export function mountState<S>(
   initialState: (() => S) | S,
 ): [S, Dispatch<BasicStateAction<S>>] {
   const hook = mountWorkInProgressHook();
@@ -116,14 +126,21 @@ function mountState<S>(
     lastRenderedState: (initialState as any),
   };
   hook.queue = queue;
+  // var dispatch = queue.dispatch = dispatchSetState.bind(null, currentlyRenderingFiber$1, queue);
   const dispatch: Dispatch<
-    BasicStateAction<S>,
+    BasicStateAction<S>
     > = (queue.dispatch = (dispatchSetState.bind(
       null,
       currentlyRenderingFiber,
       queue,
     ) as any));
   return [hook.memoizedState, dispatch];
+}
+
+export function updateState<S>(
+  initialState: (() => S) | S,
+): [S, Dispatch<BasicStateAction<S>>] {
+  return updateReducer(basicStateReducer, (initialState as any));
 }
 
 function dispatchSetState<S, A>(
@@ -171,7 +188,7 @@ function dispatchSetState<S, A>(
             // if the component re-renders for a different reason and by that
             // time the reducer has changed.
             // TODO: Do we still need to entangle transitions in this case?
-            enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update);
+            // enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update);
             return;
           }
         } catch (error) {
@@ -180,12 +197,12 @@ function dispatchSetState<S, A>(
       }
     }
 
-    const root = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
-    if (root !== null) {
-      const eventTime = requestEventTime();
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
-      entangleTransitionUpdate(root, queue, lane);
-    }
+    // const root = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+    // if (root !== null) {
+    //   const eventTime = requestEventTime();
+    //   scheduleUpdateOnFiber(root, fiber, lane, eventTime);
+    //   entangleTransitionUpdate(root, queue, lane);
+    // }
   }
 
   markUpdateInDevTools(fiber, lane, action);

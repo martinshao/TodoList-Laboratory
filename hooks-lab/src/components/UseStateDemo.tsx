@@ -20,6 +20,7 @@ function UseStateDemo() {
   useEffect(create, [count])
 
   useEffect(() => {
+    console.info('useEffect runing...')
     let id = setTimeout(() => {
       console.info('2')
     }, 2000)
@@ -43,7 +44,7 @@ function UseStateDemo() {
   // })
 
   return (
-    <div>
+    <div style={{ marginTop: '200px' }}>
       <p>You clicked {count} times</p>
       <button onClick={handleClick}>
         Click me

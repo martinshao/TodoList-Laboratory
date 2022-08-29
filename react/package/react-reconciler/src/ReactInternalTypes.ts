@@ -3,11 +3,26 @@ import { Lanes } from "./ReactFiberLane";
 import { TypeOfMode } from "./ReactTypeOfMode";
 import { WorkTag } from "./ReactWorkTags";
 import { Source } from '../../shared/ReactElementType'
+import { StartTransitionOptions, MutableSource, MutableSourceGetSnapshotFn, MutableSourceSubscribeFn } from '../../shared/ReactTypes'
 
 export type RefObject = {
   current: any,
 };
 
+export type ContextDependency<T> = {
+  context: ReactContext<T>,
+  next: ContextDependency<unknown> | null,
+  memoizedValue: T,
+};
+
+export type Dependencies = {
+  lanes: Lanes,
+  firstContext: ContextDependency<unknown> | null,
+};
+
+export type BasicStateAction<S> = ((action: S) => S) | S;
+
+export type Dispatch<A> = (action: A) => void;
 
 // Unwind Circular: moved from ReactFiberHooks.old
 export type HookType =
@@ -51,17 +66,6 @@ export type ReactContext<T> = {
   // only used by ServerContext
   _defaultValue: T,
   _globalName: string,
-};
-
-export type ContextDependency<T> = {
-  context: ReactContext<T>,
-  next: ContextDependency<unknown> | null,
-  memoizedValue: T,
-};
-
-export type Dependencies = {
-  lanes: Lanes,
-  firstContext: ContextDependency<unknown> | null,
 };
 
 
@@ -159,4 +163,60 @@ export type Fiber = {
 
   // Used to verify that the order of hooks does not change between renders.
   _debugHookTypes?: Array<HookType> | null,
+};
+
+export type Dispatcher = {
+  getCacheSignal?: () => AbortSignal,
+  getCacheForType?: <T>(resourceType: () => T) => T,
+  readContext<T>(context: ReactContext<T>): T,
+  useState<S>(initialState: (() => S) | S): [S, Dispatch<BasicStateAction<S>>],
+  useReducer<S, I, A>(
+    reducer: (state: S, action: A) => S,
+    initialArg: I,
+    init?: (init: I) => S,
+  ): [S, Dispatch<A>],
+  useContext<T>(context: ReactContext<T>): T,
+  useRef<T>(initialValue: T): { current: T },
+  useEffect(
+    create: () => (() => void) | void,
+    deps: Array<unknown> | void | null,
+  ): void,
+  useInsertionEffect(
+    create: () => (() => void) | void,
+    deps: Array<unknown> | void | null,
+  ): void,
+  useLayoutEffect(
+    create: () => (() => void) | void,
+    deps: Array<unknown> | void | null,
+  ): void,
+  useCallback<T>(callback: T, deps: Array<unknown> | void | null): T,
+  useMemo<T>(nextCreate: () => T, deps: Array<unknown> | void | null): T,
+  useImperativeHandle<T>(
+    ref: { current: T | null } | ((inst: T | null) => unknown) | null | void,
+    create: () => T,
+    deps: Array<unknown> | void | null,
+  ): void,
+  // useDebugValue<T>(value: T, formatterFn: ?(value: T) => unknown): void,
+  useDebugValue<T>(value: T, formatterFn: ((value: T) => unknown) | null | undefined): void,
+  useDeferredValue<T>(value: T): T,
+  useTransition(): [
+    boolean,
+    (callback: () => void, options?: StartTransitionOptions) => void,
+  ],
+  useMutableSource<Source, Snapshot>(
+    source: MutableSource<Source>,
+    getSnapshot: MutableSourceGetSnapshotFn<Source, Snapshot>,
+    subscribe: MutableSourceSubscribeFn<Source, Snapshot>,
+  ): Snapshot,
+  useSyncExternalStore<T>(
+    // subscribe: (() => void) => () => void,
+    subscribe: (() => void),
+    getSnapshot: () => T,
+    getServerSnapshot?: () => T,
+  ): T,
+  useId(): string,
+  // useCacheRefresh?: () => <T>(?() => T, ?T) => void,
+  useCacheRefresh?: () => <T>(a?: () => T, b?: T) => void,
+
+  unstable_isNewReconciler?: boolean,
 };
