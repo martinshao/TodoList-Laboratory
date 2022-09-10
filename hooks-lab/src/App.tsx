@@ -6,7 +6,7 @@ import './App.css';
 // import UseCreationDemo from './components/UseCreationDemo'
 // import UseMountDemo from './components/UseMountDemo'
 // import UseUpdateDemo from './components/UseUpdateDemo'
-// import UseStateDemo from './components/UseStateDemo'
+import UseStateDemo from './components/UseStateDemo'
 // import SyntheticEventDemo from './components/SyntheticEventDemo'
 // import ClassComponent from './components/ClassComponent'
 // import UseIntervalDemo from './components/UseIntervalDemo'
@@ -14,13 +14,14 @@ import './App.css';
 // import UseLeDemo from './containers/UseLeDemo'
 // import UseMemoDemo from './containers/UseMemoDemo'
 // import EffectOrderDemo from './containers/EffectOrderDemo'
-import RerednerDemo from './components/RerednerDemo'
+// import RerednerDemo from './components/RerednerDemo'
+import UseEffectDemo from './components/UseEffectDemo'
 
 function App() {
   // console.info('App rendering...')
   return (
     <div className="App">
-      <RerednerDemo />
+      <UseEffectDemo />
     </div>
   );
 }
