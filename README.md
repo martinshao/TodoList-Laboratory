@@ -49,3 +49,10 @@
 * [black7375/React-RxJS-Todo](https://github.com/black7375/React-RxJS-Todo)
 * [josepot/react-rxjs-todos](https://github.com/josepot/react-rxjs-todos)
 * [jellive/react-rxjs-todo](https://github.com/jellive/react-rxjs-todo)
+
+## 样式模版
+
+* [Tailwind CSS to do list with system date and time and strike option](https://bbbootstrap.com/snippets/tailwind-css-do-list-system-date-and-time-and-strike-option-40925319)
+* [NewTodoForm](https://codesandbox.io/s/react-todo-list-p912n?file=/src/NewTodoForm.js)
+* [todolist](https://codesandbox.io/s/6wxlmx7oyr)
+* [todolist](https://codesandbox.io/s/todolist-hdxgt)
