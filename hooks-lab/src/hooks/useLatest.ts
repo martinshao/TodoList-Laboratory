@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 function useLatest<T>(value: T) {
   const ref = useRef<T>(value)

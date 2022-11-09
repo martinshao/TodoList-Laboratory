@@ -1,7 +1,10 @@
+import React, { useMemo } from 'react';
+import { useDebounce } from 'react-use';
 
-import React from 'react'
-import useDebounce from '../hooks/useDebounce'
-
+/**
+ * usage: react-use useDebounce
+ * @returns
+ */
 function UseDebounceDemo() {
   const [state, setState] = React.useState('Typing stopped');
   const [val, setVal] = React.useState('');
@@ -13,16 +16,20 @@ function UseDebounceDemo() {
       setDebouncedValue(val);
     },
     2000,
-    false,
     [val]
   );
+
+  const searchResult = useMemo(() => {
+    console.info('debouncedValue', debouncedValue)
+    return `debouncedValue ${debouncedValue}`
+  }, [debouncedValue])
 
   return (
     <div>
       <input
-        type="text"
+        type='text'
         value={val}
-        placeholder="Debounced input"
+        placeholder='Debounced input'
         onChange={({ currentTarget }) => {
           setState('Waiting for typing to stop...');
           setVal(currentTarget.value);
@@ -33,8 +40,9 @@ function UseDebounceDemo() {
         Debounced value: {debouncedValue}
         <button onClick={cancel}>Cancel debounce</button>
       </div>
+      <div>searchResult: {searchResult}</div>
     </div>
   );
 }
 
-export default UseDebounceDemo
+export default UseDebounceDemo;

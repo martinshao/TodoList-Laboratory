@@ -11,16 +11,16 @@ import './App.css';
 // import UseIntervalDemo from './components/UseIntervalDemo'
 // import UseImhDemo from './containers/UseImhDemo'
 // import UseLeDemo from './containers/UseLeDemo'
-import OptimizationDemo from './containers/OptimizationDemo';
+import LifeCycle from './containers/LifeCycle';
 // import EffectOrderDemo from './containers/EffectOrderDemo'
 // import RerednerDemo from './components/RerednerDemo'
-// import UseEffectDemo from './components/UseEffectDemo';
+// import { UseDebounceDemo } from './components/UseDebounceDemo';
 
 function App() {
   // console.info('App rendering...')
   return (
     <div className='App'>
-      <OptimizationDemo />
+      <LifeCycle />
     </div>
   );
 }

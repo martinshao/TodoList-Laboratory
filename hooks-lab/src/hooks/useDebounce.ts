@@ -2,8 +2,15 @@ import { useState, useEffect, DependencyList, useCallback } from 'react'
 
 export type UseDebounceReturn = [boolean, () => void];
 
+export interface DebounceOptions {
+  wait?: number;
+  leading?: boolean;
+  trailing?: boolean;
+  maxWait?: number;
+}
+
 /**
- * 
+ * from react-use
  * @param fn 
  * @param delay 
  * @param immediate 

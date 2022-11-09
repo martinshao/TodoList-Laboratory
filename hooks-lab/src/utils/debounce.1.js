@@ -15,10 +15,11 @@
 
 // export default debounce
 
-const debounce = (fn, ms = 300) => {
+export const debounce = (fn, ms = 300) => {
   let timeoutId;
-  return function (this, ...args) {
+  return function (...args) {
+    const context = this
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), ms);
+    timeoutId = setTimeout(() => fn.apply(context, args), ms);
   };
 };
