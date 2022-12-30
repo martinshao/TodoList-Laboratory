@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { default as CompoundComponent } from './counter/compound-component/Usage';
 import { default as ControlProps } from './counter/control-props/Usage';
+import { default as CustomHooks } from './counter/custom-hooks/Usage';
 
 function App() {
   return (
@@ -17,6 +18,11 @@ function App() {
       <StyledPatternContainer>
         <h2>Control props pattern</h2>
         <ControlProps />
+      </StyledPatternContainer>
+
+      <StyledPatternContainer>
+        <h2>Custom hooks pattern</h2>
+        <CustomHooks />
       </StyledPatternContainer>
     </StyledContainer>
   );
