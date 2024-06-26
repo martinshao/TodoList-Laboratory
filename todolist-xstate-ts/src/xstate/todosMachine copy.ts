@@ -68,14 +68,65 @@ export const todosMachine = createMachine<TodosContext, TodosEvent>({
             if (Array.isArray(context.todos)) {
               return context.todos.concat({
                 ...newTodo,
-                ref: spawn(createTodoMachine(newTodo)),
+                ref: spawn(createTodoMachine(newTodo), `todo-${event.value}`),
               });
             }
           },
         }),
         'persist',
       ],
-      // cond: (_, event) => event.value.trim().length,
+      cond: (_, event) => event.value.trim().length,
+    },
+    'TODO.COMMIT': {
+      actions: [
+        assign({
+          todos: (context, event) =>
+            context.todos.map((todo) => {
+              return todo.id === event.todo.id
+                ? { ...todo, ...event.todo, ref: todo.ref }
+                : todo;
+            }),
+        }),
+        'persist',
+      ],
+    },
+    'TODO.DELETE': {
+      actions: [
+        assign({
+          todos: (context, event) =>
+            context.todos.filter((todo) => todo.id !== event.id),
+        }),
+        'persist',
+      ],
+    },
+    SHOW: {
+      actions: assign({
+        filter: (_, event) => event.filter,
+      }),
+    },
+    'MARK.completed': {
+      actions: (context) => {
+        context.todos.forEach((todo) => todo.ref.send('SET_COMPLETED'));
+      },
+    },
+    'MARK.active': {
+      actions: (context) => {
+        context.todos.forEach((todo) => todo.ref.send('SET_ACTIVE'));
+      },
+    },
+    CLEAR_COMPLETED: {
+      actions: [
+        actions.pure((context) => {
+          return context.todos
+            .filter((todo) => todo.completed)
+            .map((todo) => actions.stop(todo.ref));
+        }),
+        assign({
+          todos: (context) => {
+            return context.todos.filter((todo) => !todo.completed);
+          },
+        }),
+      ],
     },
   },
 });

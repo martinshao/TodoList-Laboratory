@@ -1,4 +1,5 @@
 import React from 'react';
+import Filter from './components/Filter';
 import { Counter } from './Counter';
 
 function Usage() {
@@ -11,6 +12,7 @@ function Usage() {
       <Counter.Label>Counter</Counter.Label>
       <Counter.Count max={10} />
       <Counter.Increment icon='plus' />
+      <Filter />
     </Counter>
   );
 }

@@ -1,5 +1,6 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { memo } from 'react';
 import { useCounterContext } from '../useCounterContext';
 import { StyledButton } from './StyledButton';
 
@@ -13,4 +14,4 @@ function Decrement({ icon = 'minus' }: { icon: IconProp }) {
   );
 }
 
-export default Decrement;
+export default memo(Decrement);

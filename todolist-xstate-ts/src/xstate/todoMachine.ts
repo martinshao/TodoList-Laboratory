@@ -1,6 +1,6 @@
 import { createMachine, assign, sendParent } from 'xstate'
 
-interface TodoContext {
+export interface TodoContext {
   id: string;
   title: string;
   completed: boolean;
@@ -65,7 +65,7 @@ export const createTodoMachine = ({ id, title, completed }: TodoContext) =>
             EDIT: {
               target: "editing",
               actions: "focusInput"
-            }
+            },
           }
         },
         editing: {

@@ -1,12 +1,16 @@
 import { createMachine } from 'xstate';
 
-interface IContext {
-  value: string
-}
+// interface IContext {
+//   value: string
+// }
 
-type Events = { type: 'FOO'; value: number } | { type: 'BOO' }
+// type Events = { type: 'FOO'; value: number } | { type: 'BOO' }
 
-const machine = createMachine<IContext, Events>({
+const machine = createMachine({
+  schema: {
+    context: {} as { value: string },
+    events: {} as { type: 'FOO'; value: string } | { type: 'BAR' }
+  },
   initial: 'a',
   context: {
     value: '',
@@ -24,7 +28,7 @@ const machine = createMachine<IContext, Events>({
       entry: [
         (context, event) => {
           // This will error at .flag
-          console.log(event.value);
+          console.log(event);
         }
       ]
     }

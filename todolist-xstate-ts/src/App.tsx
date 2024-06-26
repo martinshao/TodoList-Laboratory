@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import Toggler from './components/Toggler'
+import TrafficLights from './components/TrafficLights';
+import MouseMove from './components/MouseMove';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         >
           Learn React
         </a>
+        <TrafficLights />
+        <MouseMove />
       </header>
     </div>
   );
