@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import Child from './Child'
+import MemoChild from './MemoChild'
 
 const array = [1, 2, 3, 4, 5, 6, 7, 8]
 
@@ -15,14 +16,15 @@ export default function RerednerDemo() {
     [],
   )
 
-
-
   return (
     <div>
       <h1>{count}</h1>
       <button onClick={() => setcount(count => count + 1)}>Count add</button>
       {
         array.map(item => <Child key={item} log={handleClick} />)
+      }
+      {
+        array.map(item => <MemoChild key={item} log={handleClick} />)
       }
     </div>
   )

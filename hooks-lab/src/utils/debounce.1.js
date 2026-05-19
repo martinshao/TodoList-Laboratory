@@ -23,3 +23,12 @@ export const debounce = (fn, ms = 300) => {
     timeoutId = setTimeout(() => fn.apply(context, args), ms);
   };
 };
+
+export const debounce1 = (fn, ms = 300) => {
+  let timeoutId;
+  return function (...args) {
+    const context = this
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn.apply(context, args), ms)
+  }
+}
